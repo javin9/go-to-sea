@@ -8,8 +8,8 @@ npm i koa
 
 ### 特性
 
-//ES 对import支持不好
-https://github.com/tc39
+Node 对import支持不好  
+[TC39](https://github.com/tc39)
 
 ### KOA 中间件
 
