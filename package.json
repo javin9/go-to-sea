@@ -9,6 +9,19 @@
   "author": "liujianwei <liujianwei1213@163.com> (http://github.com/IIcupid)",
   "license": "MIT",
   "dependencies": {
-    "koa": "^2.7.0"
+    "axios": "^0.18.0",
+    "basic-auth": "^2.0.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "loadsh": "0.0.4",
+    "mysql2": "^1.6.5",
+    "npm-check": "^5.9.0",
+    "require-directory": "^2.1.1",
+    "sequelize": "^5.8.6",
+    "validator": "^10.11.0"
   }
 }

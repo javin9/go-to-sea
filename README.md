@@ -105,5 +105,108 @@ app.use(async (context, next) => {
 })
 
 app.listen(3000)
+
+/**
+ * 强制Promise
+ * 规则:强制加上async 和 await  
+ * async 和 await 是异步编程的终极方案
+ * 1.next()返回的是一个promise
+ * 2.中间件里面是可以return，但是建议返回值用context
+ */
+
+const Koa = require('koa')
+const app = new Koa()
+app.use((context, next) => {
+    console.log(1)
+    const promise = next()
+    console.log(promise); //结果 Promise{'node koa'}
+    console.log(2)
+})
+
+app.use((context, next) => {
+    console.log(3)
+    next()
+    console.log(4)
+    /**
+     * 此处可以返回任何东西，包括 return new Promise()
+     */
+    return 'node koa'
+})
+
+app.listen(3000)
+```
+
+### 深入理解async和await
+
+``` javascript
+/**
+ * 深入理解async和await
+ * 用awai代替promise.then的写法
+ * await:求值关键字
+ * 1.对表达式求值，不只是对promise求值 e.g await 100*100;
+ * 2.会阻塞当前的线程
+ * 异步的场景有哪些
+ * 1.对资源处理，比如读写文件，操作数据库
+ * 2.发送http请求
+ * async
+ * 1.返回的都是promise
+ */
+
+const Koa = require('koa')
+const app = new Koa()
+app.use(async (context, next) => {
+    console.log(1)
+    const a = await next()
+    console.log(2)
+})
+
+app.use((context, next) => {
+    console.log(3)
+    next()
+    console.log(4)
+    /**
+     * 此处可以返回任何东西，包括 return new Promise()
+     */
+    return 'node koa'
+})
+
+app.listen(3000)
+
+/**
+ * 洋葱模型的重要性
+ * async和await 保证了洋葱模型的顺序调用
+ */
+
+const Koa = require('koa')
+const axios = require('axios')
+const app = new Koa()
+app.use(async (ctx, next) => {
+    const start = Date.now()
+    const res = await axios.get('http://www.baidu.com')
+    console.log(res)
+    const end = Date.now()
+    console.log(start - end) //0
+})
+
+app.listen(3000)
+
+/**
+ * 中间件之间的传值，不建议用return方式，建议中contenxt上下文方式 
+ */
+const Koa = require('koa')
+const app = new Koa()
+app.use(async (context, next) => {
+    await next()
+    const res = context.r; //一定要在next后面写
+    console.log(res);
+
+})
+
+app.use(async (context, next) => {
+    context.r = '1'
+    await next()
+})
+
+app.listen(3000)
 ```
 
