@@ -20,7 +20,7 @@ const requireDirectory = require('require-directory')
 const app = new Koa()
 // const modules=requireDirectory(module) 
 // const modules = requireDirectory(module, './api/v1') //
-const modules = requireDirectory(module, './api/v1', {
+const modules = requireDirectory(module, '../app/api/v1', {
   visit: (item) => {
     if (item instanceof Router) {
       app.use(item.routes())

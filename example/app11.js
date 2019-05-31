@@ -9,8 +9,8 @@
  * 3.header             放到http header里面
  */
 const Koa = require('koa')
-const book = require('./api/v1/book')
-const classic = require('./api/v1/classic')
+const book = require('./app/api/v1/book')
+const classic = require('./app/api/v1/classic')
 
 const app = new Koa()
 app.use(book.routes())
