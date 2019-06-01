@@ -7,14 +7,23 @@
 
 const requireDirectoy = require('require-directory')
 const Router = require('koa-router');
+const parser = require('koa-bodyparser')
 
 
 class InitManager {
   static init (app) {
     InitManager.app = app
+    //注册body解析
+    InitManager.registerParser()
     //注册路由
     InitManager.registerRouter()
+   
   }
+
+  static registerParser () {
+    InitManager.app.use(parser())
+  }
+
   static registerRouter () {
     const apiDirectory = `${process.cwd()}/app/api/v1`
     requireDirectoy(module, apiDirectory, {
