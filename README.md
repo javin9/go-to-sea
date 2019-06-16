@@ -24,3 +24,15 @@ Node 对import支持不好<br>
 ### 路由系统的改造
 
 [09-14](./docs/02.md)
+
+### 异常处理
+
+- 没有发生异常 正确返回结果
+- 发生了异常
+
+#### 函数设计
+
+判断出异常
+
+- return false null
+- throw new Error编程规范

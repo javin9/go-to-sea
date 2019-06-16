@@ -8,22 +8,27 @@
 const requireDirectoy = require('require-directory')
 const Router = require('koa-router');
 const parser = require('koa-bodyparser')
+const catchError = require('../middlewares/exception.js')
 
 
 class InitManager {
   static init (app) {
     InitManager.app = app
+
+    //监听异常
+    InitManager.registerCatchError()
     //注册body解析
     InitManager.registerParser()
     //注册路由
     InitManager.registerRouter()
-   
-  }
 
+
+  }
+  //解析body
   static registerParser () {
     InitManager.app.use(parser())
   }
-
+  //注册路由
   static registerRouter () {
     const apiDirectory = `${process.cwd()}/app/api/v1`
     requireDirectoy(module, apiDirectory, {
@@ -33,6 +38,10 @@ class InitManager {
         }
       }
     })
+  }
+  //监听异常
+  static registerCatchError () {
+    InitManager.app.use(catchError)
   }
 }
 
