@@ -5,13 +5,21 @@ const catchError = async (ctx, next) => {
     await next()
   } catch (error) {
     if (error instanceof HttpException) {
-      //一直错误
+      // 已知错误
       ctx.body = {
         msg: error.message,
         error_code: error.errorCode,
         request: `${ctx.method} ${ctx.path}`
       }
       ctx.status = error.code
+    } else {
+      //位置错误
+      ctx.body = {
+        msg: 'service error',
+        error_code: 999,
+        request: `${ctx.method} ${ctx.path}`
+      }
+      ctx.status = 500
     }
   }
 }
