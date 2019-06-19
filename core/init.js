@@ -9,6 +9,7 @@ const requireDirectoy = require('require-directory')
 const Router = require('koa-router');
 const parser = require('koa-bodyparser')
 const catchError = require('../middlewares/exception.js')
+const cwd = process.cwd()
 
 
 class InitManager {
@@ -21,6 +22,8 @@ class InitManager {
     InitManager.registerParser()
     //注册路由
     InitManager.registerRouter()
+    //配置全局变量
+    InitManager.loadConfig()
 
 
   }
@@ -42,6 +45,12 @@ class InitManager {
   //监听异常
   static registerCatchError () {
     InitManager.app.use(catchError)
+  }
+  //配置全局文件
+  static loadConfig (path = '') {
+    const configPath = path.join(cwd, './config/index.js')
+    const config = require(configPath)
+    global.config = config
   }
 }
 
