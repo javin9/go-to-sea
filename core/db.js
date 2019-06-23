@@ -10,7 +10,36 @@ const sequelize = new Sequelize(dbName, user, pwd, {
   //显示sql语句
   logging: true,
   //时区
-  timezone: '+08:00'
+  timezone: '+08:00',
+  define: {
+    //设置为true，会自动创建create_time update_time 
+    timestamps: true,
+    // delte_time
+    paranoid: true,
+    // 命名风格的更改
+    underscored: true,
+    createdAt: 'created_at',
+    updatedAt: 'update_at',
+    deletedAt: 'delete_at'
+  }
 })
+
+//如果表存在，不会再次生成.如果想覆盖，需要设置 {force:true}
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.')
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err)
+  })
+
+// 同步模型
+sequelize.sync()
+  .then(res => {
+    console.log(res, 'init db ok')
+  })
+  .catch(err => {
+    console.log('init db error', err)
+  })
 
 module.exports = sequelize
