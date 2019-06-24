@@ -4,6 +4,15 @@ const { dbName, host, port, user, pwd } = require('../config/index').db
 //dbname,user,password,{}
 const sequelize = new Sequelize(dbName, user, pwd, {
   //数据库的类型 .如果连接mysql 需要安装npm包 mysql2
+  /**
+   * 
+   * # And one of the following: 
+   * npm install --save pg pg-hstore # Postgres 
+   * npm install --save mysql2
+   * npm install --save mariadb
+   * npm install --save sqlite3
+   * npm install --save tedious # Microsoft SQL Server 
+   */
   dialect: 'mysql',
   host,
   port,
