@@ -1,5 +1,13 @@
 const Sequelize = require('sequelize')
-
+/**
+ * db: {
+    dbName: 'rupid',
+    host: "root",
+    port: 3306,
+    user: 'cupid',
+    pwd: '!QAZ2wsx'
+  }
+ */
 const { dbName, host, port, user, pwd } = require('../config/index').db
 //dbname,user,password,{}
 const sequelize = new Sequelize(dbName, user, pwd, {
@@ -17,7 +25,7 @@ const sequelize = new Sequelize(dbName, user, pwd, {
   host,
   port,
   //显示sql语句
-  logging: true,
+  logging: false,
   //时区
   timezone: '+08:00',
   define: {
@@ -34,21 +42,24 @@ const sequelize = new Sequelize(dbName, user, pwd, {
 })
 
 //如果表存在，不会再次生成.如果想覆盖，需要设置 {force:true}
-sequelize.authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.')
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err)
-  })
+// sequelize.authenticate()
+//   .then(function () {
+//     console.log('Connection has been established successfully.')
+//   })
+//   .catch(err => {
+//     console.error('Unable to connect to the database:', err)
+//     process.exit(1)
+//   })
 
 // 同步模型
 sequelize.sync()
-  .then(res => {
+  .then(function (res) {
     console.log(res, 'init db ok')
   })
-  .catch(err => {
+  .catch(function (err) {
     console.log('init db error', err)
   })
 
-module.exports = sequelize
+module.exports = {
+  sequelize
+}

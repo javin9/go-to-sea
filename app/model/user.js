@@ -1,10 +1,8 @@
 
-const { Sequelize, Model } = require('sequelize')
+const Sequelize = require('sequelize')
 const { sequelize } = require('../../core/db')
 
-class User extends Model {
-
-}
+class User extends Sequelize.Model { }
 
 // 主键  关系型数据库
 // 主键  不能重复，不能为空
@@ -42,3 +40,5 @@ User.init(
 * 用户对于B小程序，是openid 是'32234'
 * 用户对于小程序，公众号，微信，有一个唯一不变的unionID
 */
+
+// module.exports = User
