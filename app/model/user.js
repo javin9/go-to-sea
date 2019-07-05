@@ -41,4 +41,6 @@ User.init(
 * 用户对于小程序，公众号，微信，有一个唯一不变的unionID
 */
 
-// module.exports = User
+module.exports = {
+  User
+}
