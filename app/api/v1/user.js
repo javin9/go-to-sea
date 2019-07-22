@@ -7,7 +7,7 @@ const { RegisterValidator } = require('../../validators/validator')
 const router = new Router()
 const { User } = require('../../model/user.js')
 
-router.post('/v1/user/register', async (ctx) => {
+router.post('/v1/user/register', async (ctx, next) => {
   //思路：接受参数-> Validator校验
   const v = new RegisterValidator().validate(ctx)
   const user = {
@@ -20,7 +20,7 @@ router.post('/v1/user/register', async (ctx) => {
 
   // 返回的模型
   const r = await User.create(user)
-  console.log(r);
+
 })
 
 module.exports = router

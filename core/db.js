@@ -54,10 +54,10 @@ const sequelize = new Sequelize(dbName, user, pwd, {
 // 同步模型
 sequelize.sync()
   .then(function (res) {
-    console.log(res, 'init db ok')
+    // console.log(res, 'init db ok')
   })
   .catch(function (err) {
-    console.log('init db error', err)
+    // console.log('init db error', err)
   })
 
 module.exports = {
